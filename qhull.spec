@@ -11,6 +11,7 @@ URL:		http://www.qhull.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
+BuildRequires:	perl-base
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,7 +34,7 @@ zmiennoprzecinkowej. Mo¿e aproksymowaæ pow³oki wypuk³e.
 Summary:	Header files for Qhull library
 Summary(pl):	Pliki nag³ówkowe biblioteki Qhull
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for Qhull library.
@@ -45,7 +46,7 @@ Pliki nag³ówkowe biblioteki Qhull.
 Summary:	Static Qhull library
 Summary(pl):	Statyczna biblioteka Qhull
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static Qhull library.
