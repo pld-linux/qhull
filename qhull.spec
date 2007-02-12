@@ -1,5 +1,5 @@
 Summary:	Qhull - convex hulls, triangulations and related computations
-Summary(pl):	Qhull - obliczanie pow≥ok wypuk≥ych, triangulacji i powi±zanych rzeczy
+Summary(pl.UTF-8):   Qhull - obliczanie pow≈Çok wypuk≈Çych, triangulacji i powiƒÖzanych rzeczy
 Name:		qhull
 Version:	2003.1
 Release:	1
@@ -22,36 +22,36 @@ Quickhull algorithm for computing convex hulls. Qhull handles
 round-off errors from floating point arithmetic. It can approximate a
 convex hull.
 
-%description -l pl
-Qhull oblicza pow≥oki wypuk≥e, triangulacje Delaunaya, diagramy
-Voronoi, diagramy Voronoi wiÍkszych rzÍdÛw oraz przeciÍcia
-pÛ≥przestrzeni. Dzia≥a w przestrzeniach dwu, trzy, cztero i wiÍcej
+%description -l pl.UTF-8
+Qhull oblicza pow≈Çoki wypuk≈Çe, triangulacje Delaunaya, diagramy
+Voronoi, diagramy Voronoi wiƒôkszych rzƒôd√≥w oraz przeciƒôcia
+p√≥≈Çprzestrzeni. Dzia≈Ça w przestrzeniach dwu, trzy, cztero i wiƒôcej
 wymiarowych. Ma zaimplementowany algorytm Quickhull do obliczania
-pow≥ok wypuk≥ych. Obs≥uguje b≥Ídy zaokr±gleÒ wynik≥e z arytmetyki
-zmiennoprzecinkowej. Moøe aproksymowaÊ pow≥oki wypuk≥e.
+pow≈Çok wypuk≈Çych. Obs≈Çuguje b≈Çƒôdy zaokrƒÖgle≈Ñ wynik≈Çe z arytmetyki
+zmiennoprzecinkowej. Mo≈ºe aproksymowaƒá pow≈Çoki wypuk≈Çe.
 
 %package devel
 Summary:	Header files for Qhull library
-Summary(pl):	Pliki nag≥Ûwkowe biblioteki Qhull
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe biblioteki Qhull
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for Qhull library.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe biblioteki Qhull.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe biblioteki Qhull.
 
 %package static
 Summary:	Static Qhull library
-Summary(pl):	Statyczna biblioteka Qhull
+Summary(pl.UTF-8):   Statyczna biblioteka Qhull
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static Qhull library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka Qhull.
 
 %prep
