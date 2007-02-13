@@ -1,5 +1,5 @@
 Summary:	Qhull - convex hulls, triangulations and related computations
-Summary(pl.UTF-8):   Qhull - obliczanie powłok wypukłych, triangulacji i powiązanych rzeczy
+Summary(pl.UTF-8):	Qhull - obliczanie powłok wypukłych, triangulacji i powiązanych rzeczy
 Name:		qhull
 Version:	2003.1
 Release:	1
@@ -32,7 +32,7 @@ zmiennoprzecinkowej. Może aproksymować powłoki wypukłe.
 
 %package devel
 Summary:	Header files for Qhull library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki Qhull
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Qhull
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -44,7 +44,7 @@ Pliki nagłówkowe biblioteki Qhull.
 
 %package static
 Summary:	Static Qhull library
-Summary(pl.UTF-8):   Statyczna biblioteka Qhull
+Summary(pl.UTF-8):	Statyczna biblioteka Qhull
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
