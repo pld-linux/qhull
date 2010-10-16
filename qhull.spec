@@ -1,17 +1,18 @@
 Summary:	Qhull - convex hulls, triangulations and related computations
 Summary(pl.UTF-8):	Qhull - obliczanie powłok wypukłych, triangulacji i powiązanych rzeczy
 Name:		qhull
-Version:	2003.1
-Release:	2
+Version:	2010.1
+Release:	1
 License:	distributable (see COPYING.txt)
 Group:		Libraries
 Source0:	http://www.qhull.org/download/%{name}-%{version}-src.tgz
-# Source0-md5:	3f301373539a55b8c7aa961b6c13d196
+# Source0-md5:	e64138470acdeb18f752a0bc2a11ceb4
+Patch0:		%{name}-update.patch
 URL:		http://www.qhull.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-BuildRequires:	perl-base
+BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -56,10 +57,9 @@ Statyczna biblioteka Qhull.
 
 %prep
 %setup -q
+%patch0 -p1
 
-%{__perl} -pi -e 's/\r//g;s/^echo Run/exit 0/' src/Make-config.sh
-touch src/Makefile.txt
-mv -f src/{Mborland,MBorland}
+sed -i -e 's/^echo Run/exit 0/' src/Make-config.sh
 
 %build
 cd src
@@ -78,6 +78,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qhull
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -87,17 +89,24 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc Announce.txt COPYING.txt README.txt REGISTER.txt index.htm
-%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%{_mandir}/man1/*.1*
+%attr(755,root,root) %{_bindir}/qconvex
+%attr(755,root,root) %{_bindir}/qdelaunay
+%attr(755,root,root) %{_bindir}/qhalf
+%attr(755,root,root) %{_bindir}/qhull
+%attr(755,root,root) %{_bindir}/qvoronoi
+%attr(755,root,root) %{_bindir}/rbox
+%attr(755,root,root) %{_libdir}/libqhull.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libqhull.so.4
+%{_mandir}/man1/qhull.1*
+%{_mandir}/man1/rbox.1*
 
 %files devel
 %defattr(644,root,root,755)
 %doc html/*.{htm,gif}
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libqhull.so
+%{_libdir}/libqhull.la
 %{_includedir}/qhull
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libqhull.a
