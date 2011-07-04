@@ -1,18 +1,16 @@
 Summary:	Qhull - convex hulls, triangulations and related computations
 Summary(pl.UTF-8):	Qhull - obliczanie powłok wypukłych, triangulacji i powiązanych rzeczy
 Name:		qhull
-Version:	2010.1
+Version:	2011.1
 Release:	1
 License:	distributable (see COPYING.txt)
 Group:		Libraries
 Source0:	http://www.qhull.org/download/%{name}-%{version}-src.tgz
-# Source0-md5:	e64138470acdeb18f752a0bc2a11ceb4
-Patch0:		%{name}-update.patch
+# Source0-md5:	1704bbae3a4d56d624ea7d309fbef46a
+Patch0:		%{name}-cmake.patch
 URL:		http://www.qhull.org/
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	libtool
-BuildRequires:	sed >= 4.0
+BuildRequires:	cmake >= 2.6
+BuildRequires:	rpmbuild(macros) >= 1.603
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,21 +53,50 @@ Static Qhull library.
 %description static -l pl.UTF-8
 Statyczna biblioteka Qhull.
 
+%package c++
+Summary:	QhullCPP library
+Summary(pl.UTF-8):	Biblioteka QhullCPP
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description c++
+QhullCPP library.
+
+%description c++ -l pl.UTF-8
+Biblioteka QhullCPP.
+
+%package c++-devel
+Summary:	Header files for QhullCPP library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki QhullCPP
+Group:		Development/Libraries
+Requires:	%{name}-c++ = %{version}-%{release}
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	libstdc++-devel
+
+%description c++-devel
+Header files for QhullCPP library.
+
+%description c++-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki QhullCPP.
+
+%package c++-static
+Summary:	Static QhullCPP library
+Summary(pl.UTF-8):	Statyczna biblioteka QhullCPP
+Group:		Development/Libraries
+Requires:	%{name}-c++-devel = %{version}-%{release}
+
+%description c++-static
+Static QhullCPP library.
+
+%description c++-static -l pl.UTF-8
+Statyczna biblioteka QhullCPP.
+
 %prep
 %setup -q
 %patch0 -p1
 
-sed -i -e 's/^echo Run/exit 0/' src/Make-config.sh
-
 %build
-cd src
-./Make-config.sh
-cd ..
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-%configure
+%cmake .
 %{__make}
 
 %install
@@ -78,7 +105,13 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qhull
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/packages
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/user_eg*
+
+# missing in cmake
+install -d $RPM_BUILD_ROOT%{_mandir}/man1
+install html/qhull.man $RPM_BUILD_ROOT%{_mandir}/man1/qhull.1
+install html/rbox.man $RPM_BUILD_ROOT%{_mandir}/man1/rbox.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -96,7 +129,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/qvoronoi
 %attr(755,root,root) %{_bindir}/rbox
 %attr(755,root,root) %{_libdir}/libqhull.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libqhull.so.4
+%attr(755,root,root) %ghost %{_libdir}/libqhull.so.6
 %{_mandir}/man1/qhull.1*
 %{_mandir}/man1/rbox.1*
 
@@ -104,9 +137,24 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc html/*.{htm,gif}
 %attr(755,root,root) %{_libdir}/libqhull.so
-%{_libdir}/libqhull.la
-%{_includedir}/qhull
+%{_includedir}/libqhull
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libqhull.a
+%{_libdir}/libqhullstatic.a
+%{_libdir}/libqhullstatic_p.a
+
+%files c++
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libqhullcpp.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libqhullcpp.so.6
+
+%files c++-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libqhullcpp.so
+%{_includedir}/libqhullcpp
+%{_includedir}/road
+
+%files c++-static
+%defattr(644,root,root,755)
+%{_libdir}/libqhullcppstatic.a
