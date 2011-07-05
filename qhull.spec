@@ -6,7 +6,7 @@ Release:	1
 License:	distributable (see COPYING.txt)
 Group:		Libraries
 Source0:	http://www.qhull.org/download/%{name}-%{version}-src.tgz
-# Source0-md5:	1704bbae3a4d56d624ea7d309fbef46a
+# Source0-md5:	a65061cf2a6e6581182f4df0f3667a8e
 Patch0:		%{name}-cmake.patch
 URL:		http://www.qhull.org/
 BuildRequires:	cmake >= 2.6
@@ -96,7 +96,8 @@ Statyczna biblioteka QhullCPP.
 %patch0 -p1
 
 %build
-%cmake .
+%cmake . \
+	-DMAN_INSTALL_DIR=%{_mandir}/man1
 %{__make}
 
 %install
@@ -107,11 +108,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/packages
 %{__rm} $RPM_BUILD_ROOT%{_bindir}/user_eg*
-
-# missing in cmake
-install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install html/qhull.man $RPM_BUILD_ROOT%{_mandir}/man1/qhull.1
-install html/rbox.man $RPM_BUILD_ROOT%{_mandir}/man1/rbox.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
