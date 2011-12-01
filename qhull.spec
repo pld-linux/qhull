@@ -1,12 +1,12 @@
 Summary:	Qhull - convex hulls, triangulations and related computations
 Summary(pl.UTF-8):	Qhull - obliczanie powłok wypukłych, triangulacji i powiązanych rzeczy
 Name:		qhull
-Version:	2011.1
+Version:	2011.2
 Release:	1
 License:	distributable (see COPYING.txt)
 Group:		Libraries
 Source0:	http://www.qhull.org/download/%{name}-%{version}-src.tgz
-# Source0-md5:	a65061cf2a6e6581182f4df0f3667a8e
+# Source0-md5:	4f4bac7769a5b1e0c6470ea457e2d4d2
 Patch0:		%{name}-cmake.patch
 URL:		http://www.qhull.org/
 BuildRequires:	cmake >= 2.6
