@@ -10,6 +10,7 @@ Source0:	http://www.qhull.org/download/%{name}-%{version}-src.tgz
 Patch0:		%{name}-cmake.patch
 URL:		http://www.qhull.org/
 BuildRequires:	cmake >= 2.6
+BuildRequires:	libstdc++-devel
 BuildRequires:	rpmbuild(macros) >= 1.603
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
