@@ -1,12 +1,12 @@
 Summary:	Qhull - convex hulls, triangulations and related computations
 Summary(pl.UTF-8):	Qhull - obliczanie powłok wypukłych, triangulacji i powiązanych rzeczy
 Name:		qhull
-Version:	2011.2
+Version:	2012.1
 Release:	1
 License:	distributable (see COPYING.txt)
 Group:		Libraries
 Source0:	http://www.qhull.org/download/%{name}-%{version}-src.tgz
-# Source0-md5:	4f4bac7769a5b1e0c6470ea457e2d4d2
+# Source0-md5:	d0f978c0d8dfb2e919caefa56ea2953c
 Patch0:		%{name}-cmake.patch
 URL:		http://www.qhull.org/
 BuildRequires:	cmake >= 2.6
@@ -106,8 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/packages
-%{__rm} $RPM_BUILD_ROOT%{_bindir}/user_eg*
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qhull
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -124,15 +123,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/qhull
 %attr(755,root,root) %{_bindir}/qvoronoi
 %attr(755,root,root) %{_bindir}/rbox
-%attr(755,root,root) %{_libdir}/libqhull.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libqhull.so.6
+%attr(755,root,root) %{_libdir}/libqhull.so.6
+%attr(755,root,root) %{_libdir}/libqhull_p.so.6
 %{_mandir}/man1/qhull.1*
 %{_mandir}/man1/rbox.1*
 
 %files devel
 %defattr(644,root,root,755)
-%doc html/*.{htm,gif}
+%doc html/*.{htm,gif,jpg}
 %attr(755,root,root) %{_libdir}/libqhull.so
+%attr(755,root,root) %{_libdir}/libqhull_p.so
 %{_includedir}/libqhull
 
 %files static
@@ -142,14 +142,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files c++
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libqhullcpp.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libqhullcpp.so.6
+%attr(755,root,root) %{_libdir}/libqhullcpp.so.6
 
 %files c++-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libqhullcpp.so
 %{_includedir}/libqhullcpp
-%{_includedir}/road
 
 %files c++-static
 %defattr(644,root,root,755)
