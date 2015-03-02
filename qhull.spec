@@ -100,6 +100,7 @@ Statyczna biblioteka QhullCPP.
 
 %build
 %cmake . \
+	-DLIB_INSTALL_DIR=%{_libdir} \
 	-DMAN_INSTALL_DIR=%{_mandir}/man1
 %{__make}
 
