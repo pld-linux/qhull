@@ -1,14 +1,13 @@
 Summary:	Qhull - convex hulls, triangulations and related computations
 Summary(pl.UTF-8):	Qhull - obliczanie powłok wypukłych, triangulacji i powiązanych rzeczy
 Name:		qhull
-Version:	2012.1
-Release:	3
+Version:	2015.2
+Release:	1
 License:	distributable (see COPYING.txt)
 Group:		Libraries
-Source0:	http://www.qhull.org/download/%{name}-%{version}-src.tgz
-# Source0-md5:	d0f978c0d8dfb2e919caefa56ea2953c
+Source0:	http://www.qhull.org/download/%{name}-2015-src-7.2.0.tgz
+# Source0-md5:	e6270733a826a6a7c32b796e005ec3dc
 Patch0:		%{name}-cmake.patch
-Patch1:		format-security.patch
 URL:		http://www.qhull.org/
 BuildRequires:	cmake >= 2.6
 BuildRequires:	libstdc++-devel
@@ -96,7 +95,6 @@ Statyczna biblioteka QhullCPP.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %cmake . \
@@ -118,6 +116,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
+%post	c++ -p /sbin/ldconfig
+%postun	c++ -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc Announce.txt COPYING.txt README.txt REGISTER.txt index.htm
@@ -127,8 +128,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/qhull
 %attr(755,root,root) %{_bindir}/qvoronoi
 %attr(755,root,root) %{_bindir}/rbox
-%attr(755,root,root) %{_libdir}/libqhull.so.6
-%attr(755,root,root) %{_libdir}/libqhull_p.so.6
+%attr(755,root,root) %{_libdir}/libqhull.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libqhull.so.7
+%attr(755,root,root) %{_libdir}/libqhull_p.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libqhull_p.so.7
+%attr(755,root,root) %{_libdir}/libqhull_r.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libqhull_r.so.7
 %{_mandir}/man1/qhull.1*
 %{_mandir}/man1/rbox.1*
 
@@ -137,16 +142,19 @@ rm -rf $RPM_BUILD_ROOT
 %doc html/*.{htm,gif,jpg}
 %attr(755,root,root) %{_libdir}/libqhull.so
 %attr(755,root,root) %{_libdir}/libqhull_p.so
+%attr(755,root,root) %{_libdir}/libqhull_r.so
 %{_includedir}/libqhull
+%{_includedir}/libqhull_r
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libqhullstatic.a
-%{_libdir}/libqhullstatic_p.a
+%{_libdir}/libqhullstatic_r.a
 
 %files c++
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libqhullcpp.so.6
+%attr(755,root,root) %{_libdir}/libqhullcpp.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libqhullcpp.so.7
 
 %files c++-devel
 %defattr(644,root,root,755)
