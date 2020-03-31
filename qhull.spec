@@ -1,12 +1,12 @@
 Summary:	Qhull - convex hulls, triangulations and related computations
 Summary(pl.UTF-8):	Qhull - obliczanie powłok wypukłych, triangulacji i powiązanych rzeczy
 Name:		qhull
-Version:	2015.2
+Version:	2019.1
 Release:	1
 License:	distributable (see COPYING.txt)
 Group:		Libraries
-Source0:	http://www.qhull.org/download/%{name}-2015-src-7.2.0.tgz
-# Source0-md5:	e6270733a826a6a7c32b796e005ec3dc
+Source0:	http://www.qhull.org/download/%{name}-2019-src-7.3.2.tgz
+# Source0-md5:	53c04f9c89b491b17b10c7ea1eaa4cc8
 Patch0:		%{name}-cmake.patch
 URL:		http://www.qhull.org/
 BuildRequires:	cmake >= 2.6
@@ -97,7 +97,9 @@ Statyczna biblioteka QhullCPP.
 %patch0 -p1
 
 %build
-%cmake . \
+install -d build-cmake
+cd build-cmake
+%cmake .. \
 	-DLIB_INSTALL_DIR=%{_libdir} \
 	-DMAN_INSTALL_DIR=%{_mandir}/man1
 %{__make}
@@ -105,7 +107,7 @@ Statyczna biblioteka QhullCPP.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build-cmake install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qhull
@@ -145,6 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libqhull_r.so
 %{_includedir}/libqhull
 %{_includedir}/libqhull_r
+%{_libdir}/cmake/Qhull
 
 %files static
 %defattr(644,root,root,755)
