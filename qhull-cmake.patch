@@ -134,3 +134,12 @@
  
  # ---------------------------------------
  # qhullp is qhull/unix.c linked to deprecated qh_QHpointer libqhull_p
+@@ -630,7 +630,7 @@
+   @ONLY
+ )
+ 
+-set(ConfigPackageLocation lib/cmake/Qhull)
++set(ConfigPackageLocation lib${LIB_SUFFIX}/cmake/Qhull)
+ install(EXPORT QhullTargets
+   FILE
+     QhullTargets.cmake
